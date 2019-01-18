@@ -5,6 +5,7 @@
 #include <SPI.h>
 
 #define CLK 2000000
+#define SAMPLING 1000
 
 const int chipSelect1 = 10;
 const unsigned int CH1 = 0x0600;
@@ -20,6 +21,8 @@ const byte READ1 = 0b00001111;
 int i = 0;
 void setup() {
 
+  cli();
+
   // pinMode(freqOutputPin, OUTPUT);
 
   // TCCR1A = ( (1 << COM1A0));
@@ -28,33 +31,67 @@ void setup() {
 
   // TIMSK1 = 0;
 
-  // OCR1A = ocr1aval;
+  TCNT1 = 0;
+
+  TCCR1A = 0;
+
+  TCCR1B = ( (1 << WGM12) | (1 << CS10));
+  
+  OCR1A = 16000/(SAMPLING/1000);
+  // OCR1A = 16000;
+
+  TIMSK1 = (1 << OCIE1A);
 
   pinMode(chipSelect1, OUTPUT);
-  Serial.begin(19200);
+  Serial.begin(57600);
   // SPISettings mcp3208(100000, MSBFIRST, SPI_MODE0);
   SPI.begin();
   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
   digitalWrite(chipSelect1, HIGH);
-  while (Serial);
+  // attachInterrupt(11 ,SPI2Serial, 1000);
+
+  sei();
+  while (!Serial);
 }
 
 void loop() {
   // readSPI();
   // digitalWrite(chipSelect1, HIGH);
   // while (readSPI() < 20);
-  // for (;i<1000; i++) {
-    Serial.println(readSPI());
+  // for (;i<5000; i++) {
+ 
+  // for (i = 0; i<8; i++) {
+  //   x = readSPI(i);
+  //   itoa(x, output, 16);
+  //   toSerialOut[i*2] = output[0];
+  //   toSerialOut[i*2 + 1] = output[1];
+  // }
+    // Serial.write(output);
   // }
 }
 
-unsigned int readSPI() {
+ISR(TIMER1_COMPA_vect) {
+  SPI2Serial();
+}
+
+void SPI2Serial() {
+  unsigned int x = readSPI(0);
+  char output[2];
+  char toSerialOut[16];
+  unsigned int i;
+  itoa(x, output, 16);
+  Serial.println(output);
+}
+
+unsigned int readSPI(unsigned int ch) {
   digitalWrite(chipSelect1, LOW);
-  unsigned int dataIN, dataBuff;
-  unsigned int lastByte;
-  SPI.transfer(0x06);
-  dataBuff = SPI.transfer16(0x0000);
+  unsigned int dataBuff;
+  unsigned int last2Byte;
+  byte dataOUT;
+  dataOUT = 0x06 | (ch >> 2);
+  last2Byte = 0x0000 | (ch << 6);
+  SPI.transfer(dataOUT);
+  dataBuff = SPI.transfer16(last2Byte);
   digitalWrite(chipSelect1, HIGH);
-  // delay(10);
   return dataBuff & BITMASK;
 }

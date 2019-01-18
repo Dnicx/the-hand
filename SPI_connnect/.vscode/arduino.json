@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:leonardo",
-    "port": "COM7",
+    "port": "COM5",
     "sketch": "SPI_connnect.ino"
 }
