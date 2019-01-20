@@ -23,35 +23,20 @@ void setup() {
 
   cli();
 
-  // pinMode(freqOutputPin, OUTPUT);
-
-  // TCCR1A = ( (1 << COM1A0));
-
-  // TCCR1B = ((1 << WGM12) | (1 << CS10));
-
-  // TIMSK1 = 0;
-
   TCNT1 = 0;
-
   TCCR1A = 0;
-
   TCCR1B = ( (1 << WGM12) | (1 << CS10));
-  
   OCR1A = 16000/(SAMPLING/1000);
-  // OCR1A = 16000;
-
   TIMSK1 = (1 << OCIE1A);
 
   pinMode(chipSelect1, OUTPUT);
-  Serial.begin(57600);
-  // SPISettings mcp3208(100000, MSBFIRST, SPI_MODE0);
+  Serial.begin(230400);
+  // SPISettings mcp3208(2000000, MSBFIRST, SPI_MODE0);
   SPI.begin();
   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
   digitalWrite(chipSelect1, HIGH);
-  // attachInterrupt(11 ,SPI2Serial, 1000);
 
   sei();
-  while (!Serial);
 }
 
 void loop() {
@@ -75,12 +60,25 @@ ISR(TIMER1_COMPA_vect) {
 }
 
 void SPI2Serial() {
-  unsigned int x = readSPI(0);
-  char output[2];
-  char toSerialOut[16];
-  unsigned int i;
-  itoa(x, output, 16);
-  Serial.println(output);
+  if (Serial1) {
+    unsigned int x;
+    // x = readSPI(0);
+    char output[3];
+    char toSerialOut[18];
+    int i;
+
+    for (i = 0; i<8; i = i+1) {
+      x = readSPI(i);
+      toSerialOut[(i*2)+1] = (char)(x & 0xFF);
+      toSerialOut[i*2] = (char)(x >> 8);      
+    }
+    // toSerialOut[16] = '\n';
+    Serial.write(toSerialOut, 16);
+    // output[2] = 'g';
+    // output[1] = (char)(x & 0xFF);
+    // output[0] = (char)(x >> 8);
+    // Serial.write(output, 3);
+  }
 }
 
 unsigned int readSPI(unsigned int ch) {
@@ -89,7 +87,7 @@ unsigned int readSPI(unsigned int ch) {
   unsigned int last2Byte;
   byte dataOUT;
   dataOUT = 0x06 | (ch >> 2);
-  last2Byte = 0x0000 | (ch << 6);
+  last2Byte = 0x0000 | (ch << 14);
   SPI.transfer(dataOUT);
   dataBuff = SPI.transfer16(last2Byte);
   digitalWrite(chipSelect1, HIGH);

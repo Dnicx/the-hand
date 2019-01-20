@@ -1,5 +1,6 @@
 {
     "board": "arduino:avr:leonardo",
     "port": "COM5",
+    "output": "../SPI_connnect/build",
     "sketch": "SPI_connnect.ino"
 }
