@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2019-03-22T20:44:08Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.3.1"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "EMG3"
+        },
+        "Owner": "Teerapat Prompunjai <theerapat.nick@gmail.com>",
+        "Size": {
+            "X": 160,
+            "Y": 100
+        }
+    }
+}

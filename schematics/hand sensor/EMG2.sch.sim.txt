@@ -1,0 +1,59 @@
+Note: Starting dynamic gmin stepping
+Trying gmin =  1.0000E-003 Note: One successful gmin step
+Trying gmin =  1.0000E-004 Note: One successful gmin step
+Trying gmin =  1.0000E-005 Note: One successful gmin step
+Trying gmin =  1.0000E-006 Warning: Further gmin increment
+Trying gmin =  5.6234E-006 Note: One successful gmin step
+Trying gmin =  2.3714E-006 Note: One successful gmin step
+Trying gmin =  6.4938E-007 Warning: Further gmin increment
+Trying gmin =  1.7154E-006 Note: One successful gmin step
+Trying gmin =  1.0554E-006 Warning: Further gmin increment
+Trying gmin =  1.5193E-006 Note: One successful gmin step
+Trying gmin =  1.2663E-006 Warning: Further gmin increment
+Trying gmin =  1.4517E-006 Note: One successful gmin step
+Trying gmin =  1.3558E-006 Warning: Further gmin increment
+Trying gmin =  1.4271E-006 Note: One successful gmin step
+Trying gmin =  1.3910E-006 Warning: Further gmin increment
+Trying gmin =  1.4180E-006 Note: One successful gmin step
+Trying gmin =  1.4044E-006 Note: One successful gmin step
+Trying gmin =  1.3843E-006 Warning: Further gmin increment
+Trying gmin =  1.3994E-006 Note: One successful gmin step
+Trying gmin =  1.3918E-006 Note: One successful gmin step
+Trying gmin =  1.3843E-006 Note: One successful gmin step
+Trying gmin =  1.3732E-006 Note: One successful gmin step
+Trying gmin =  1.3566E-006 Note: One successful gmin step
+Trying gmin =  1.3321E-006 Note: One successful gmin step
+Trying gmin =  1.2961E-006 Note: One successful gmin step
+Trying gmin =  1.2440E-006 Note: One successful gmin step
+Trying gmin =  1.1698E-006 Note: One successful gmin step
+Trying gmin =  1.0666E-006 Note: One successful gmin step
+Trying gmin =  9.2869E-007 Note: One successful gmin step
+Trying gmin =  7.5452E-007 Note: One successful gmin step
+Trying gmin =  5.5254E-007 Note: One successful gmin step
+Trying gmin =  4.0463E-007 Note: One successful gmin step
+Trying gmin =  2.5357E-007 Note: One successful gmin step
+Trying gmin =  1.2580E-007 Note: One successful gmin step
+Trying gmin =  4.3955E-008 Note: One successful gmin step
+Trying gmin =  9.0788E-009 Note: One successful gmin step
+Trying gmin =  9.0788E-010 Note: One successful gmin step
+Trying gmin =  9.0788E-011 Note: One successful gmin step
+Trying gmin =  9.0788E-012 Note: One successful gmin step
+Trying gmin =  1.0000E-012 Note: One successful gmin step
+Note: Dynamic gmin stepping completed
+
+Circuit: * spicenetlist
+
+Warning: Model issue on line 0 : .model x_ic1:sp sw(ron=300k, roff=100g, von=14.8, voff=1 ...
+  unrecognized parameter (von) - ignored
+unrecognized parameter (voff) - ignored
+Warning: Model issue on line 0 : .model x_ic1:sm sw(ron=3.5k, roff=100g, von=-15.1, voff= ...
+  unrecognized parameter (von) - ignored
+unrecognized parameter (voff) - ignored
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 0.000000 and TNOM = 27.000000
+
+
+No. of Data Rows : 500
+ASCII raw file
+
+Note: No ".plot", ".print", or ".fourier" lines; no simulations run
