@@ -8,6 +8,7 @@
 #define SAMPLING 1000
 
 const int chipSelect1 = 10;
+const int chipSelect2 = 11;
 const unsigned int CH1 = 0x0600;
 const unsigned int CH2 = 0x0640;
 const unsigned int CH3 = 0x0680;
@@ -18,7 +19,6 @@ const byte READ1 = 0b00001111;
 // const int freqOutputPin = 9;   // OC1A output pin for ATmega32u4 (Arduino Micro)
 // const int ocr1aval  = 7;
 
-int i = 0;
 void setup() {
 
   cli();
@@ -30,11 +30,14 @@ void setup() {
   TIMSK1 = (1 << OCIE1A);
 
   pinMode(chipSelect1, OUTPUT);
-  Serial.begin(230400);
+  pinMode(chipSelect2, OUTPUT);
+//  Serial.begin(230400); //-> 345600
+  Serial.begin(500000);
   // SPISettings mcp3208(2000000, MSBFIRST, SPI_MODE0);
   SPI.begin();
   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
   digitalWrite(chipSelect1, HIGH);
+  digitalWrite(chipSelect2, HIGH);
 
   sei();
 }
@@ -64,25 +67,28 @@ void SPI2Serial() {
     unsigned int x;
     // x = readSPI(0);
     char output[3];
-    char toSerialOut[18];
+    char toSerialOut[34];
     int i;
 
     for (i = 0; i<8; i = i+1) {
-      x = readSPI(i);
+      x = readSPI(chipSelect1, i);
       toSerialOut[(i*2)+1] = (char)(x & 0xFF);
       toSerialOut[i*2] = (char)(x >> 8);      
     }
-    // toSerialOut[16] = '\n';
-    Serial.write(toSerialOut, 16);
-    // output[2] = 'g';
-    // output[1] = (char)(x & 0xFF);
-    // output[0] = (char)(x >> 8);
-    // Serial.write(output, 3);
+//    Serial.write(toSerialOut, 16);
+
+    for (i = 8; i<16; i = i+1) {
+      x = readSPI(chipSelect2, i-8);
+      toSerialOut[(i*2)+1] = (char)(x & 0xFF);
+      toSerialOut[i*2] = (char)(x >> 8);      
+    }
+    Serial.write(toSerialOut, 32);
+
   }
 }
 
-unsigned int readSPI(unsigned int ch) {
-  digitalWrite(chipSelect1, LOW);
+unsigned int readSPI(int chipSelect, unsigned int ch) {
+  digitalWrite(chipSelect, LOW);
   unsigned int dataBuff;
   unsigned int last2Byte;
   byte dataOUT;
@@ -90,6 +96,6 @@ unsigned int readSPI(unsigned int ch) {
   last2Byte = 0x0000 | (ch << 14);
   SPI.transfer(dataOUT);
   dataBuff = SPI.transfer16(last2Byte);
-  digitalWrite(chipSelect1, HIGH);
+  digitalWrite(chipSelect, HIGH);
   return dataBuff & BITMASK;
 }

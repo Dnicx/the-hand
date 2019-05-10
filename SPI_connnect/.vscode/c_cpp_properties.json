@@ -5,8 +5,6 @@
             "includePath": [
                 "D:\\Program Files (x86)\\Arduino\\tools\\**",
                 "D:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
-                "D:\\Program file\\Arduino\\tools\\**",
-                "D:\\Program file\\Arduino\\hardware\\arduino\\avr\\**",
                 "${workspaceFolder}/**"
             ],
             "defines": [
