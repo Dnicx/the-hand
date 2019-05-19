@@ -1,8 +1,8 @@
 * SpiceNetList
 * 
-* Exported from EMG2.sch at 4/13/2019 1:18 PM
+* Exported from EMG2.sch at 5/18/2019 2:43 PM
 * 
-* EAGLE Version 9.3.1 Copyright (c) 1988-2019 Autodesk, Inc.
+* EAGLE Version 9.4.0 Copyright (c) 1988-2019 Autodesk, Inc.
 * 
 .TEMP=25.0
 
@@ -12,40 +12,40 @@
 * --------- .PARAMS ---------
 
 * --------- devices ---------
-X_IC1 N_3 N_3 +9V -9V N_6 0 N_1 N_2 INA118a 
-X_IC3 N_17 N_28 N_12 N_27 N_14 N_27 +9V -9V OP275p 
-R_R4 N_10 N_9 20k 
-R_R19 +9V N_26 10k 
 R_R1 N_5 N_8 51K 
 R_R15 N_24 N_20 4.5K 
-V_G3 +9V 0 DC 9V AC 0 
-C_C7 0 -9V 100u 
-R_RG N_2 N_1 1K 
-C_C8 N_27 N_4 100nF 
-R_R8 N_15 N_12 18K 
-R_R12 N_4 N_11 5.1k 
-C_C5 +9V 0 100u 
-C_C2 N_5 N_7 220nF 
-C_C3 N_11 N_9 33nF 
-R_R14 N_20 N_22 18K 
-C_C4 N_10 0 22nF 
-C_C1 N_6 N_5 220nF 
-R_R2 0 N_7 102K 
-R_R6 N_17 N_27 1K 
-R_R22 N_28 N_26 1K 
-R_R7 N_12 N_17 100K 
-R_R21 N_26 N_23 180 
 V_G4 0 -9V DC 9V AC 0 
-R_R20 N_23 -9V 10k 
-R_R10 N_21 +5V 10K 
-D_D1 N_25 N_24 DMOD 
-X_IC5 N_20 N_15 N_25 N_22 N_21 N_22 +9V -9V OP275p 
-V_V1 N_6 0 DC 0V AC .02V 
+R_R7 N_12 N_17 100K 
+R_R8 N_15 N_12 18K 
+R_R6 N_17 N_27 1K 
+R_R19 +9V N_26 10k 
+R_R4 N_10 N_9 20k 
+C_C8 N_27 N_4 100nF 
 C_C6 N_26 0 1uF 
-R_R3 N_9 N_8 6.8k 
-C_C9 N_14 0 10nF 
-R_R11 0 N_21 10k 
+R_R12 N_4 N_11 5.1k 
+R_R20 N_23 -9V 10k 
+C_C7 0 -9V 100u 
+C_C1 N_6 N_5 220nF 
+C_C3 N_11 N_9 33nF 
+V_G3 +9V 0 DC 9V AC 0 
+R_R21 N_26 N_23 180 
+R_R10 N_21 +5V 10K 
+V_V1 N_6 0 DC 0V AC .02V 
+C_C5 +9V 0 100u 
+X_IC3 N_17 N_28 N_12 N_27 N_14 N_27 +9V -9V OP275p 
+C_C2 N_5 N_7 220nF 
+R_R2 0 N_7 102K 
 R_R13 N_14 N_4 20k 
+X_IC5 N_20 N_15 N_25 N_22 N_21 N_22 +9V -9V OP275p 
+C_C4 N_10 0 22nF 
+X_IC1 N_3 N_3 +9V -9V N_6 0 N_1 N_2 INA118a 
+R_R14 N_20 N_22 18K 
+D_D1 N_25 N_24 DMOD 
+R_R3 N_9 N_8 6.8k 
+R_R22 N_28 N_26 1K 
+R_RG N_2 N_1 1K 
+R_R11 0 N_21 10k 
+C_C9 N_14 0 10nF 
 X_IC2 N_11 N_10 N_11 N_8 N_7 N_8 +9V -9V OP275p 
 
 * --------- models ---------
@@ -533,7 +533,7 @@ D10 50 33     DY
 .control
 set filetype=ascii
 AC Lin 500 1 2000 
-write EMG2.sch.sim V(N_12) V(N_27) V(N_26) V(N_28) I(V_G4) I(V_V1) I(V_G3)
+write EMG2.sch.sim V(N_12) V(N_27) V(N_26) V(N_28) I(V_V1) I(V_G3) I(V_G4)
 .endc
 
 

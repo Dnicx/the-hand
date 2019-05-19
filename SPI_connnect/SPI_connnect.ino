@@ -9,12 +9,9 @@
 
 const int chipSelect1 = 10;
 const int chipSelect2 = 11;
-const unsigned int CH1 = 0x0600;
-const unsigned int CH2 = 0x0640;
-const unsigned int CH3 = 0x0680;
-const unsigned int CH4 = 0x06B0;
 const unsigned int BITMASK = 0x0FFF;
 const byte READ1 = 0b00001111;
+const long buadrate = 500000;
 
 // const int freqOutputPin = 9;   // OC1A output pin for ATmega32u4 (Arduino Micro)
 // const int ocr1aval  = 7;
@@ -32,7 +29,7 @@ void setup() {
   pinMode(chipSelect1, OUTPUT);
   pinMode(chipSelect2, OUTPUT);
 //  Serial.begin(230400); //-> 345600
-  Serial.begin(500000);
+  Serial.begin(buadrate);
   // SPISettings mcp3208(2000000, MSBFIRST, SPI_MODE0);
   SPI.begin();
   SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
